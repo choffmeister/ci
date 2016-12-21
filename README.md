@@ -2,9 +2,9 @@
 
 Docker image for airfocus CI. Comes with
 
-* Java 8u91 JDK
+* OpenJDK 8u111 JDK
 * Scala 2.11.8
-* SBT 0.13.9
-* Node 6.2.2
-* NPM 3.9.5
-* Docker 1.11.2 client
+* SBT 0.13.12
+* Node 6.9.2
+* NPM 3.10.9
+* Docker 1.12.3 client
