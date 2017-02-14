@@ -3,8 +3,7 @@ MAINTAINER Christian Hoffmeister <mail@choffmeister.de>
 
 ENV SCALA_VERSION="2.11.8"
 ENV SBT_VERSION="0.13.12"
-ENV NODE_VERSION="6.9.2"
-ENV NPM_VERSION="3.10.9"
+ENV NODE_VERSION="7.5.0"
 ENV DOCKER_VERSION="1.12.3"
 
 WORKDIR /tmp
@@ -30,7 +29,7 @@ RUN \
   sbt exit
 RUN \
   wget https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz && \
-  echo "96b6e389d415f95b413dc7ffec7675546b738973  node-v$NODE_VERSION-linux-x64.tar.xz" | shasum -c - && \
+  echo "03b6f20ff6a7d0f4aa1adf6c136e7fdd6cadad5e  node-v$NODE_VERSION-linux-x64.tar.xz" | shasum -c - && \
   tar xf node-v$NODE_VERSION-linux-x64.tar.xz && \
   mv node-v$NODE_VERSION-linux-x64 /opt/node && \
   ln -s /opt/node/bin/node /usr/bin/node && \
