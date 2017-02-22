@@ -1,8 +1,9 @@
 REPO=choffmeister/airfocus-ci
-TAG=latest
 
 build:
-	docker build -t $(REPO):$(TAG) .
+	docker build -t $(REPO):server server/
+	docker build -t $(REPO):web web/
 
 deploy: build
-	docker push $(REPO):$(TAG)
+	docker push $(REPO):server
+	docker push $(REPO):web

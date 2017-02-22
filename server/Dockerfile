@@ -3,7 +3,6 @@ MAINTAINER Christian Hoffmeister <mail@choffmeister.de>
 
 ENV SCALA_VERSION="2.11.8"
 ENV SBT_VERSION="0.13.12"
-ENV NODE_VERSION="7.5.0"
 ENV DOCKER_VERSION="1.12.3"
 
 WORKDIR /tmp
@@ -28,14 +27,6 @@ RUN \
   rm sbt-$SBT_VERSION.tgz && \
   sbt exit
 RUN \
-  wget https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz && \
-  echo "03b6f20ff6a7d0f4aa1adf6c136e7fdd6cadad5e  node-v$NODE_VERSION-linux-x64.tar.xz" | shasum -c - && \
-  tar xf node-v$NODE_VERSION-linux-x64.tar.xz && \
-  mv node-v$NODE_VERSION-linux-x64 /opt/node && \
-  ln -s /opt/node/bin/node /usr/bin/node && \
-  ln -s /opt/node/bin/npm /usr/bin/npm && \
-  rm node-v$NODE_VERSION-linux-x64.tar.xz
-RUN \
   wget https://get.docker.com/builds/Linux/x86_64/docker-$DOCKER_VERSION.tgz && \
   echo "a3bb88649bcc47775c29dab7d95709f4dda04d0e  docker-$DOCKER_VERSION.tgz" | shasum -c - && \
   tar xf docker-$DOCKER_VERSION.tgz && \
@@ -43,4 +34,4 @@ RUN \
   ln -s /opt/docker/docker /usr/bin/docker && \
   rm -r docker-$DOCKER_VERSION.tgz
 
-WORKDIR /opt/airfocus
+WORKDIR /root

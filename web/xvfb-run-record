@@ -1,0 +1,30 @@
+#!/bin/bash
+
+export DISPLAY=:99
+
+# start virtual display
+Xvfb ${DISPLAY} -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x24 -ac &
+PID_XVFB=$!
+sleep 1
+matchbox-window-manager >/dev/null &
+PID_MATCHBOX=$!
+sleep 1
+
+# start screen record
+ffmpeg -video_size ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT} -framerate 10 -f x11grab -i ${DISPLAY}.0+0,0 "${1}" -y -c:v h264 -crf 20 -preset veryfast 2>/dev/null &
+PID_FFMPEG=$!
+
+# run actual command
+"${@:2}"
+EXIT_CODE=$?
+
+# stop screen record
+kill -INT ${PID_FFMPEG}
+
+# stop virtual display
+sleep 1
+kill ${PID_MATCHBOX}
+kill ${PID_XVFB}
+
+# exit with exit code of actual command
+exit ${EXIT_CODE}

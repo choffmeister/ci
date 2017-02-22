@@ -1,0 +1,23 @@
+#!/bin/bash
+
+export DISPLAY=:99
+
+# start virtual display
+Xvfb ${DISPLAY} -screen 0 ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}x24 -ac &
+PID_XVFB=$!
+sleep 1
+matchbox-window-manager >/dev/null &
+PID_MATCHBOX=$!
+sleep 1
+
+# run actual command
+"${@}"
+EXIT_CODE=$?
+
+# stop virtual display
+sleep 1
+kill ${PID_MATCHBOX}
+kill ${PID_XVFB}
+
+# exit with exit code of actual command
+exit ${EXIT_CODE}
