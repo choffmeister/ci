@@ -1,0 +1,2 @@
+FROM buildpack-deps:jessie-scm
+MAINTAINER Christian Hoffmeister <mail@choffmeister.de>

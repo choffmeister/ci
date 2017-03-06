@@ -1,9 +1,8 @@
-REPO=choffmeister/airfocus-ci
+REPO=choffmeister/ci
 
 build:
-	docker build -t $(REPO):server server/
-	docker build -t $(REPO):web web/
+	cat Dockerfile.base Dockerfile.openjdk Dockerfile.node Dockerfile.custom > Dockerfile
+	docker build -t $(REPO):latest .
 
-deploy: build
-	docker push $(REPO):server
-	docker push $(REPO):web
+push: build
+	docker push $(REPO):latest
